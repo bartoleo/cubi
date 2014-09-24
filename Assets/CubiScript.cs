@@ -101,7 +101,7 @@ public class CubiScript : MonoBehaviour
 
 			} else if (Input.touchCount ==1 && Input.GetTouch (0).phase == TouchPhase.Ended) {
 				float distanceFromTouch = Vector2.Distance((Vector2)startTouchPoint, Input.GetTouch(0).position);
-				if (distanceFromTouch<10){
+				if (distanceFromTouch<20){
 					RaycastHit hitInfo = new RaycastHit ();
 					bool hit = Physics.Raycast (Camera.main.ScreenPointToRay (Input.GetTouch(0).position), out hitInfo);
 					if (hit) {
