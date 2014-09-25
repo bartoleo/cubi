@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CubiScript : MonoBehaviour
+public class cubi : MonoBehaviour
 {
 	private float screenWidth;
 	private float screenHeight;
@@ -19,6 +19,8 @@ public class CubiScript : MonoBehaviour
 
 	GameObject first;
 	GameObject second;
+	GameObject[][][] grigliaCubi;
+
 
 	void Start ()
 	{
@@ -29,19 +31,22 @@ public class CubiScript : MonoBehaviour
 		ratio = screenWidth / screenHeight;
 
 		int dimension = gamestate.Instance.getDimension ();
-		print (dimension);
-		for (int y = 1; y <= dimension; y++) {
-			for (int x = 1; x <= dimension; x++) {
+
+		grigliaCubi = new GameObject[dimension][][];
+
+		for (int x = 1; x <= dimension; x++) {
+			grigliaCubi[x-1] = new GameObject[dimension][];
+			for (int y = 1; y <= dimension; y++) {
+				grigliaCubi[x-1][y-1] = new GameObject[dimension];
 				for (int z = 1; z <= dimension; z++) {
 
 					float xpos = ((float)x-((float)dimension+1)/2);
 					float ypos = ((float)y-((float)dimension+1)/2);
 					float zpos = ((float)z-((float)dimension+1)/2);
 
-					print(xpos +","+ ypos +","+ zpos);
-
 					cubo = (GameObject)Instantiate (cuboPrefab, new Vector3 (xpos, ypos, zpos), Quaternion.identity);
 					cubo.transform.parent = this.transform;
+					grigliaCubi[x-1][y-1][z-1]=cubo;
 				}
 			}
 		}
@@ -101,11 +106,11 @@ public class CubiScript : MonoBehaviour
 
 			} else if (Input.touchCount ==1 && Input.GetTouch (0).phase == TouchPhase.Ended) {
 				float distanceFromTouch = Vector2.Distance((Vector2)startTouchPoint, Input.GetTouch(0).position);
-				if (distanceFromTouch<20){
+				if (distanceFromTouch<30){
 					RaycastHit hitInfo = new RaycastHit ();
 					bool hit = Physics.Raycast (Camera.main.ScreenPointToRay (Input.GetTouch(0).position), out hitInfo);
 					if (hit) {
-						hitInfo.transform.GetComponent<CuboScript>().seleziona();
+						selectCube(hitInfo.transform);
 					} 
 					oldDistance = null;
 					oldAngle = null;
@@ -137,7 +142,7 @@ public class CubiScript : MonoBehaviour
 					RaycastHit hitInfo = new RaycastHit ();
 					bool hit = Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out hitInfo);
 					if (hit) {
-						hitInfo.transform.GetComponent<CuboScript>().seleziona();
+						selectCube(hitInfo.transform);
 					} 
 				}
 				oldScreenPoint = Vector3.zero;
@@ -145,6 +150,20 @@ public class CubiScript : MonoBehaviour
 			}
 		}
 
+	}
+
+	void selectCube(Transform cube){
+		cube.GetComponent<cubo>().seleziona();
+		for (int x=0; x<grigliaCubi.Length; x++) {
+			for (int y=0; y<grigliaCubi.Length; y++) {
+				for (int z=0; z<grigliaCubi.Length; z++) {
+					//print (grigliaCubi[x][y][z]);
+					if (grigliaCubi[x][y][z].transform == cube){
+						print ("trovato:"+x+","+y+","+z);
+					}
+				}
+			}
+		}
 	}
 	
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CuboScript : MonoBehaviour {
+public class cubo : MonoBehaviour {
 
 	public bool selected;
 
@@ -17,7 +17,6 @@ public class CuboScript : MonoBehaviour {
 
 	public void seleziona(){
 		selected = !selected;
-		print (selected);
 		if (selected) {
 			this.renderer.material.color = new Color (1, 0, 0); 
 		} else {
