@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using StartApp;
 
 public class gamestart : MonoBehaviour {
-
+	
+	void Start () {
+		#if UNITY_ANDROID
+		StartAppWrapper.addBanner( 
+		                          StartAppWrapper.BannerType.AUTOMATIC,
+		                          StartAppWrapper.BannerPosition.BOTTOM);
+		#endif
+	}
 	
 	// Our Startscreen GUI
 	void OnGUI () 
@@ -48,7 +56,10 @@ public class gamestart : MonoBehaviour {
 		
 		DontDestroyOnLoad(gamestate.Instance);
 		gamestate.Instance.startState(dimension);
+
+
 	}
+
 
 	void Update ()
 	{
@@ -56,5 +67,6 @@ public class gamestart : MonoBehaviour {
 			Application.Quit(); 
 		}
 	}
+
 
 }
