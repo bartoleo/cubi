@@ -6,7 +6,7 @@ public class gamestart : MonoBehaviour {
 	
 	void Start () {
 		#if UNITY_ANDROID
-		StartAppWrapper.addBanner( 
+		  StartAppWrapper.addBanner( 
 		                          StartAppWrapper.BannerType.AUTOMATIC,
 		                          StartAppWrapper.BannerPosition.BOTTOM);
 		#endif
