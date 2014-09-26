@@ -15,36 +15,38 @@ public class gamestart : MonoBehaviour {
 	// Our Startscreen GUI
 	void OnGUI () 
 	{
-		
-		if(GUI.Button(new Rect (30, 30, 150, 30), "Start Game 2"))
+		GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
+		myButtonStyle.fontSize = 20;
+
+		if(GUI.Button(new Rect (30, 30, 150, 60), "Start Game 2",myButtonStyle))
 		{
 			startGame(2);
 		}
-		if(GUI.Button(new Rect (30, 60, 150, 30), "Start Game 3"))
+		if(GUI.Button(new Rect (30, 90, 150, 60), "Start Game 3",myButtonStyle))
 		{
 			startGame(3);
 		}
-		if(GUI.Button(new Rect (30, 90, 150, 30), "Start Game 4"))
+		if(GUI.Button(new Rect (30, 150, 150, 60), "Start Game 4",myButtonStyle))
 		{
 			startGame(4);
 		}
-		if(GUI.Button(new Rect (30, 120, 150, 30), "Start Game 5"))
+		if(GUI.Button(new Rect (30, 210, 150, 60), "Start Game 5",myButtonStyle))
 		{
 			startGame(5);
 		}
-		if(GUI.Button(new Rect (30, 150, 150, 30), "Start Game 7"))
+		if(GUI.Button(new Rect (30, 270, 150, 60), "Start Game 7",myButtonStyle))
 		{
 			startGame(7);
 		}
-		if(GUI.Button(new Rect (30, 180, 150, 30), "Start Game 9"))
+		if(GUI.Button(new Rect (30, 330, 150, 60), "Start Game 9",myButtonStyle))
 		{
 			startGame(9);
 		}
-		if(GUI.Button(new Rect (30, 210, 150, 30), "Start Game 20"))
+		if(GUI.Button(new Rect (30, 390, 150, 60), "Start Game 20",myButtonStyle))
 		{
 			startGame(20);
 		}
-		if(GUI.Button(new Rect (30, 270, 150, 30), "Quit"))
+		if(GUI.Button(new Rect (30, 480, 150, 60), "Quit",myButtonStyle))
 		{
 			Application.Quit();
 		}
