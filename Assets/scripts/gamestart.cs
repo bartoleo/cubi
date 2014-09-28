@@ -3,50 +3,70 @@ using System.Collections;
 using StartApp;
 
 public class gamestart : MonoBehaviour {
-	
+
+	private GUIStyle buttonStyle;
+	private GUIStyle titleStyle;
+	private GUIStyle subTitleStyle;
+
 	void Start () {
+
 		#if UNITY_ANDROID
 		  StartAppWrapper.addBanner( 
 		                          StartAppWrapper.BannerType.AUTOMATIC,
 		                          StartAppWrapper.BannerPosition.BOTTOM);
 		#endif
+
+
+
 	}
 	
 	// Our Startscreen GUI
 	void OnGUI () 
 	{
-		GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-		myButtonStyle.fontSize = 20;
+		buttonStyle = new GUIStyle(GUI.skin.button);
+		buttonStyle.fontSize = 20;
+		buttonStyle.alignment = TextAnchor.MiddleCenter;
+		
+		titleStyle = new GUIStyle(GUI.skin.label);
+		titleStyle.fontSize = 40;
+		titleStyle.alignment = TextAnchor.MiddleCenter;
 
-		if(GUI.Button(new Rect (30, 30, 150, 60), "Start Game 2",myButtonStyle))
+		subTitleStyle = new GUIStyle(GUI.skin.label);
+		subTitleStyle.fontSize = 20;
+		subTitleStyle.alignment = TextAnchor.MiddleCenter;
+
+		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 40), "CUBI", titleStyle);
+		GUI.Label(new Rect(Screen.width/2-200, 70, 400, 40), "by Bartoleo", subTitleStyle);
+
+		if(GUI.Button(new Rect (Screen.width/2-90, 120, 180, 60), "Start Game 2",buttonStyle))
 		{
 			startGame(2);
 		}
-		if(GUI.Button(new Rect (30, 90, 150, 60), "Start Game 3",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 180, 180, 60), "Start Game 3",buttonStyle))
 		{
 			startGame(3);
 		}
-		if(GUI.Button(new Rect (30, 150, 150, 60), "Start Game 4",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 240, 180, 60), "Start Game 4",buttonStyle))
 		{
 			startGame(4);
 		}
-		if(GUI.Button(new Rect (30, 210, 150, 60), "Start Game 5",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 300, 180, 60), "Start Game 5",buttonStyle))
 		{
 			startGame(5);
 		}
-		if(GUI.Button(new Rect (30, 270, 150, 60), "Start Game 7",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 360, 180, 60), "Start Game 7",buttonStyle))
 		{
 			startGame(7);
 		}
-		if(GUI.Button(new Rect (30, 330, 150, 60), "Start Game 9",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 420, 180, 60), "Start Game 9",buttonStyle))
 		{
 			startGame(9);
 		}
-		if(GUI.Button(new Rect (30, 390, 150, 60), "Start Game 20",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 480, 180, 60), "Start Game 20",buttonStyle))
 		{
 			startGame(20);
 		}
-		if(GUI.Button(new Rect (30, 480, 150, 60), "Quit",myButtonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 540, 180, 60), "Quit",buttonStyle))
 		{
 			Application.Quit();
 		}
