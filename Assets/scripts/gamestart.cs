@@ -8,6 +8,8 @@ public class gamestart : MonoBehaviour {
 	private GUIStyle titleStyle;
 	private GUIStyle subTitleStyle;
 
+	private int dimension = 5;
+
 	void Start () {
 
 		#if UNITY_ANDROID
@@ -38,46 +40,35 @@ public class gamestart : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 40), "CUBI", titleStyle);
 		GUI.Label(new Rect(Screen.width/2-200, 70, 400, 40), "by Bartoleo", subTitleStyle);
 
-		if(GUI.Button(new Rect (Screen.width/2-90, 120, 180, 60), "Start Game 2",buttonStyle))
+		dimension = Mathf.RoundToInt(GUI.HorizontalSlider (new Rect (Screen.width/2-200,160,400,30), dimension, 2.0f, 11.0f));
+		GUI.Label(new Rect(Screen.width/2-200, 130, 400, 40), "Size: "+dimension, subTitleStyle);
+
+		if(GUI.Button(new Rect (Screen.width/2-90, 190, 180, 60), "Start Game",buttonStyle))
 		{
-			startGame(2);
+			startGame(dimension, true);
 		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 180, 180, 60), "Start Game 3",buttonStyle))
+
+		if(GUI.Button(new Rect (Screen.width/2-90, 250, 180, 60), "Sandbox",buttonStyle))
 		{
-			startGame(3);
+			startGame(dimension, false);
 		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 240, 180, 60), "Start Game 4",buttonStyle))
-		{
-			startGame(4);
-		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 300, 180, 60), "Start Game 5",buttonStyle))
-		{
-			startGame(5);
-		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 360, 180, 60), "Start Game 7",buttonStyle))
-		{
-			startGame(7);
-		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 420, 180, 60), "Start Game 9",buttonStyle))
-		{
-			startGame(9);
-		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 480, 180, 60), "Start Game 20",buttonStyle))
-		{
-			startGame(20);
-		}
-		if(GUI.Button(new Rect (Screen.width/2-90, 540, 180, 60), "Quit",buttonStyle))
+
+
+		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), "Quit",buttonStyle))
 		{
 			Application.Quit();
 		}
+
+
+
 	}
 	
-	private void startGame(int dimension)
+	private void startGame(int dimension, bool game)
 	{
 		print("Starting game");
 		
 		DontDestroyOnLoad(gamestate.Instance);
-		gamestate.Instance.startState(dimension);
+		gamestate.Instance.startState(dimension, game);
 
 
 	}

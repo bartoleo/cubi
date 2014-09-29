@@ -8,7 +8,8 @@ public class gamestate : MonoBehaviour {
 
 	private string activeLevel;			// Active level
 	private int dimension;
-	
+	private bool game;
+
 	public string getLevel()
 	{
 		return activeLevel;
@@ -25,6 +26,15 @@ public class gamestate : MonoBehaviour {
 	public void setDimension(int newDimension)
 	{
 		dimension = newDimension;
+	}
+
+	public bool isGame()
+	{
+		return game;
+	}
+	public void setGame(bool newGame)
+	{
+		game = newGame;
 	}
 	
 	// ---------------------------------------------------------------------------------------------------
@@ -61,11 +71,12 @@ public class gamestate : MonoBehaviour {
 	// --------------------------------------------------------------------------------------------------- 
 	// Creates a new game state
 	// ---------------------------------------------------------------------------------------------------
-	public void startState(int newDimension)
+	public void startState(int newDimension, bool newGame)
 	{
 		print ("Creating a new game state");
 		activeLevel = "Level "+newDimension;
 		dimension = newDimension;
+		game = newGame;
 		Application.LoadLevel("game01");
 	}
 }

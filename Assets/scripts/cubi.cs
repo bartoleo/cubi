@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class cubi : MonoBehaviour
 {
 	private float screenWidth;
 	private float screenHeight;
 	private float ratio;
+
+	private bool game;
+
 	public GameObject cuboPrefab;
 	public Camera camera;
 	public float speed = 0.1F;
@@ -31,6 +35,7 @@ public class cubi : MonoBehaviour
 		ratio = screenWidth / screenHeight;
 
 		int dimension = gamestate.Instance.getDimension ();
+		game = gamestate.Instance.isGame ();
 
 		grigliaCubi = new GameObject[dimension][][];
 
@@ -47,8 +52,13 @@ public class cubi : MonoBehaviour
 					cubo = (GameObject)Instantiate (cuboPrefab, new Vector3 (xpos, ypos, zpos), Quaternion.identity);
 					cubo.transform.parent = this.transform;
 					grigliaCubi[x-1][y-1][z-1]=cubo;
+
 				}
 			}
+		}
+
+		if (game) {
+			assignValuesToCubi();
 		}
 
 		minCameraz = (float)(-(float)dimension * 1.5);
@@ -165,7 +175,11 @@ public class cubi : MonoBehaviour
 
 		cubo cuboScript = cube.GetComponent<cubo>();
 
-		cuboScript.seleziona ();
+		if (game) {
+			cuboScript.seleziona();
+		} else {
+			cuboScript.selezionaSandbox();
+		}
 
 		for (int x=0; x<grigliaCubi.Length; x++) {
 			for (int y=0; y<grigliaCubi.Length; y++) {
@@ -185,8 +199,11 @@ public class cubi : MonoBehaviour
 	{
 		GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
 		myButtonStyle.fontSize = 20;
-		if (GUI.Button (new Rect (10, 10, 200, 60), "Destroy Selected",myButtonStyle)) {
-			destroySelected();
+
+		if (!game) {
+			if (GUI.Button (new Rect (10, 10, 200, 60), "Destroy Selected",myButtonStyle)) {
+				destroySelected();
+			}
 		}
 	}
 
@@ -203,6 +220,58 @@ public class cubi : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	void assignValuesToCubi(){
+		int size = 0;
+		int index = 0;
+
+		List<int> values = new List<int> ();
+
+		for (int x=0; x<grigliaCubi.Length; x++) {
+			for (int y=0; y<grigliaCubi.Length; y++) {
+				for (int z=0; z<grigliaCubi.Length; z++) {
+					if (grigliaCubi[x][y][z]!=null){
+						size++;
+					}
+				}
+			}
+		}
+
+		for (int i=0;i<size;i++){
+			values.Add(i%4);
+		}
+
+		values = ShuffleList(values);
+
+		index = 0;
+		for (int x=0; x<grigliaCubi.Length; x++) {
+			for (int y=0; y<grigliaCubi.Length; y++) {
+				for (int z=0; z<grigliaCubi.Length; z++) {
+					if (grigliaCubi[x][y][z]!=null){
+						grigliaCubi[x][y][z].GetComponent<cubo>().value=values[index];
+						grigliaCubi[x][y][z].GetComponent<cubo>().colora(false);
+						index++;
+					}
+				}
+			}
+		}
+
+	}
+
+	private List<E> ShuffleList<E>(List<E> inputList)
+	{
+		List<E> randomList = new List<E>();
+		
+		int randomIndex = 0;
+		while (inputList.Count > 0)
+		{
+			randomIndex = Random.Range(0, inputList.Count); //Choose a random object in the list
+			randomList.Add(inputList[randomIndex]); //add it to the new, random list
+			inputList.RemoveAt(randomIndex); //remove to avoid duplicates
+		}
+		
+		return randomList; //return the new random list
 	}
 	
 }
