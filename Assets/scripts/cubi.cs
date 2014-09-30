@@ -176,7 +176,33 @@ public class cubi : MonoBehaviour
 		cubo cuboScript = cube.GetComponent<cubo>();
 
 		if (game) {
-			cuboScript.seleziona();
+			if (cuboScript.selected){
+				cuboScript.seleziona(false);
+				if (cube.gameObject == first){
+					first = null;
+				} else if (cube.gameObject == second){
+					second = null;
+				}  
+			} else {
+				cuboScript.seleziona(true);
+				if (first==null){
+					first = cube.gameObject;
+				} else if (second==null){
+					second = cube.gameObject;
+				}
+				if (first!=null&&second!=null&&first!=second){
+					if (first.GetComponent<cubo>().value==second.GetComponent<cubo>().value){
+						first = null;
+						second = null;
+						destroySelected();
+					} else {
+						first.GetComponent<cubo>().seleziona(false);
+						second.GetComponent<cubo>().seleziona(false);
+						first = null;
+						second = null;
+					}
+				}
+			}
 		} else {
 			cuboScript.selezionaSandbox();
 		}
@@ -238,8 +264,13 @@ public class cubi : MonoBehaviour
 			}
 		}
 
+		int max = 9;
+		if (size < max * 2) {
+			max = size/2;
+		}
+
 		for (int i=0;i<size;i++){
-			values.Add(i%4);
+			values.Add(i%max);
 		}
 
 		values = ShuffleList(values);

@@ -26,7 +26,7 @@ public class levelgui : MonoBehaviour {
 		labelStyle.fontSize = 20;
 		labelStyle.alignment = TextAnchor.MiddleCenter;
 
-		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 30), "Level: " + gamestate.Instance.getLevel(), labelStyle);
+		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 30), gamestate.Instance.getLevel(), labelStyle);
 	
 	}
 

@@ -5,15 +5,19 @@ public class cubo : MonoBehaviour {
 
 	public bool selected;
 	public int value;
-	private Color[] colors =  new Color[4]{ new Color (1, 0, 0),new Color (0, 0, 1),new Color (0, 0.6f, 0), new Color (1, 1, 0)};
+	private Color[] colors =  new Color[9]{ 
+		new Color (1, 0, 0),
+		new Color (0, 0.6f, 0), 
+		new Color (0, 0, 1),
+		new Color (1, 1, 0),
+		new Color (0, 1, 1),
+		new Color (1, 0, 1),
+		new Color (0.6f, 0.6f, 0.6f),
+		new Color (1f, 0.6f, 0.2f),
+		new Color (0.2f, 0.2f, 0.2f)};
 
 	// Use this for initialization
 	void Start () {
-		colors = new Color[4];
-		colors [0] = new Color (1, 0, 0);
-		colors [1] = new Color (0, 0, 1);
-		colors [2] = new Color (0, 0.8f, 0);
-		colors [3] = new Color (1, 1, 0);
 	}
 	
 	// Update is called once per frame
@@ -22,13 +26,15 @@ public class cubo : MonoBehaviour {
 	}
 
 	public void colora (bool pSelected){
-		print (this.renderer.material.color);
-		print (colors [value]);
-		this.renderer.material.color = colors[value];
+		Color color = colors [value];
+		if (pSelected) {
+			color = color*2;
+		}
+		this.renderer.material.color = color;
 	}
 
-	public void seleziona(){
-		selected = !selected;
+	public void seleziona(bool pSelected){
+		selected = pSelected;
 		colora (selected);
 	}
 
