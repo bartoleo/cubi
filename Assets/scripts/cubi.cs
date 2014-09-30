@@ -20,6 +20,7 @@ public class cubi : MonoBehaviour
 	float? oldDistance = null;
 	float? oldAngle = null;
 	float minCameraz = 0;
+	float startTime;
 
 	GameObject first;
 	GameObject second;
@@ -65,6 +66,7 @@ public class cubi : MonoBehaviour
 
 		camera.transform.position = new Vector3(camera.transform.position.x,camera.transform.position.y, -8 - dimension*dimension/10);
 
+		startTime = Time.time;
 
 	}
 	
@@ -226,11 +228,20 @@ public class cubi : MonoBehaviour
 		GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
 		myButtonStyle.fontSize = 20;
 
+		GUIStyle timerLabelStyle = new GUIStyle(GUI.skin.label);
+		timerLabelStyle.fontSize = 20;
+		timerLabelStyle.alignment = TextAnchor.MiddleRight;
+
 		if (!game) {
 			if (GUI.Button (new Rect (10, 10, 200, 60), "Destroy Selected",myButtonStyle)) {
 				destroySelected();
 			}
 		}
+
+		GUI.color = Color.black;
+
+		GUI.Label (new Rect (Screen.width - 200, 30, 170, 60), "Time: "+getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
+
 	}
 
 	void destroySelected(){
@@ -264,14 +275,23 @@ public class cubi : MonoBehaviour
 			}
 		}
 
-		int max = 9;
-		if (size < max * 2) {
-			max = size/2;
+		int colors = 9;
+		float step = size;
+		step = step / colors / 2f;
+		print (step);
+		step = Mathf.FloorToInt (step + 0.99f) * 2;
+		if (step % 2 == 1) {
+			step++;
+		}
+		print (step);
+		int value;
+		for (int i=0;i<size;i++){
+			value = (int)(i/step);
+			print (value);
+			values.Add(value);
 		}
 
-		for (int i=0;i<size;i++){
-			values.Add(i%max);
-		}
+
 
 		values = ShuffleList(values);
 
@@ -304,5 +324,10 @@ public class cubi : MonoBehaviour
 		
 		return randomList; //return the new random list
 	}
-	
+
+	private string getTimeMinutesSeconds(float timer){
+		string minutes = Mathf.Floor(timer / 60).ToString("00");
+		string seconds = Mathf.Floor(timer % 60).ToString("00");
+		return minutes + "." + seconds;
+    }
 }

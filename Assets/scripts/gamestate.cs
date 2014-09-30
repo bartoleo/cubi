@@ -50,7 +50,7 @@ public class gamestate : MonoBehaviour {
 			{
 				instance = ((GameObject) new GameObject("gamestate")).AddComponent<gamestate>();
 
-				instance.dimension = 5;
+				instance.dimension = 3;
 				instance.game = true;
 
 			}

@@ -9,8 +9,6 @@ public class levelgui : MonoBehaviour {
 	void Start () 
 	{
 		print ("Loaded: " + gamestate.Instance.getLevel());
-
-
 	}
 	
 	
@@ -25,6 +23,8 @@ public class levelgui : MonoBehaviour {
 		labelStyle = new GUIStyle(GUI.skin.label);
 		labelStyle.fontSize = 20;
 		labelStyle.alignment = TextAnchor.MiddleCenter;
+
+		GUI.color = Color.black;
 
 		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 30), gamestate.Instance.getLevel(), labelStyle);
 	
