@@ -8,7 +8,7 @@ public class gamestart : MonoBehaviour {
 	private GUIStyle titleStyle;
 	private GUIStyle subTitleStyle;
 
-	private int dimension = 5;
+	private int dimension = 0;
 
 	void Start () {
 
@@ -18,15 +18,13 @@ public class gamestart : MonoBehaviour {
 		                          StartAppWrapper.BannerPosition.BOTTOM);
 		#endif
 
-
-
 	}
 	
 	// Our Startscreen GUI
 	void OnGUI () 
 	{
 		buttonStyle = new GUIStyle(GUI.skin.button);
-		buttonStyle.fontSize = 20;
+		buttonStyle.fontSize = 21;
 		buttonStyle.alignment = TextAnchor.MiddleCenter;
 		
 		titleStyle = new GUIStyle(GUI.skin.label);
@@ -34,8 +32,12 @@ public class gamestart : MonoBehaviour {
 		titleStyle.alignment = TextAnchor.MiddleCenter;
 
 		subTitleStyle = new GUIStyle(GUI.skin.label);
-		subTitleStyle.fontSize = 20;
+		subTitleStyle.fontSize = 21;
 		subTitleStyle.alignment = TextAnchor.MiddleCenter;
+
+		if (dimension == 0) {
+			dimension = gamestate.Instance.getDimension ();
+		}
 
 		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 40), "CUBI", titleStyle);
 		GUI.Label(new Rect(Screen.width/2-200, 70, 400, 40), "by Bartoleo", subTitleStyle);
@@ -65,12 +67,8 @@ public class gamestart : MonoBehaviour {
 	
 	private void startGame(int dimension, bool game)
 	{
-		print("Starting game");
-		
 		DontDestroyOnLoad(gamestate.Instance);
-		gamestate.Instance.startState(dimension, game);
-
-
+		gamestate.Instance.openInstructions(dimension, game);
 	}
 
 

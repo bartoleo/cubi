@@ -21,7 +21,7 @@ public class levelgui : MonoBehaviour {
 	void OnGUI()
 	{				
 		labelStyle = new GUIStyle(GUI.skin.label);
-		labelStyle.fontSize = 20;
+		labelStyle.fontSize = 21	;
 		labelStyle.alignment = TextAnchor.MiddleCenter;
 
 		GUI.color = Color.black;
@@ -33,7 +33,7 @@ public class levelgui : MonoBehaviour {
 	void Update ()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape)) { 
-			Application.LoadLevel("gamestart");
+			gamestate.Instance.gotoGameStart();
 		}
 	}
 }

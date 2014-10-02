@@ -197,6 +197,7 @@ public class cubi : MonoBehaviour
 						first = null;
 						second = null;
 						destroySelected();
+						checkFinish();
 					} else {
 						first.GetComponent<cubo>().seleziona(false);
 						second.GetComponent<cubo>().seleziona(false);
@@ -209,6 +210,7 @@ public class cubi : MonoBehaviour
 			cuboScript.selezionaSandbox();
 		}
 
+		/*
 		for (int x=0; x<grigliaCubi.Length; x++) {
 			for (int y=0; y<grigliaCubi.Length; y++) {
 				for (int z=0; z<grigliaCubi.Length; z++) {
@@ -219,17 +221,17 @@ public class cubi : MonoBehaviour
 					}
 				}
 			}
-		}
+		}*/
 
 	}
 
 	void OnGUI () 
 	{
 		GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-		myButtonStyle.fontSize = 20;
+		myButtonStyle.fontSize = 21;
 
 		GUIStyle timerLabelStyle = new GUIStyle(GUI.skin.label);
-		timerLabelStyle.fontSize = 20;
+		timerLabelStyle.fontSize = 21;
 		timerLabelStyle.alignment = TextAnchor.MiddleRight;
 
 		if (!game) {
@@ -240,7 +242,7 @@ public class cubi : MonoBehaviour
 
 		GUI.color = Color.black;
 
-		GUI.Label (new Rect (Screen.width - 200, 30, 170, 60), "Time: "+getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
+		GUI.Label (new Rect (Screen.width - 200, 30, 170, 30), "Time: "+utility.getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
 
 	}
 
@@ -325,9 +327,21 @@ public class cubi : MonoBehaviour
 		return randomList; //return the new random list
 	}
 
-	private string getTimeMinutesSeconds(float timer){
-		string minutes = Mathf.Floor(timer / 60).ToString("00");
-		string seconds = Mathf.Floor(timer % 60).ToString("00");
-		return minutes + "." + seconds;
-    }
+	void checkFinish(){
+		int cubes = 0;
+		for (int x=0; x<grigliaCubi.Length; x++) {
+			for (int y=0; y<grigliaCubi.Length; y++) {
+				for (int z=0; z<grigliaCubi.Length; z++) {
+					if (grigliaCubi [x] [y] [z] != null) {
+						cubes++;
+					}
+				}
+			}
+		}
+
+		if (cubes <= 1) {
+			gamestate.Instance.gamefinish(Time.time - startTime);
+		}
+	}
+
 }

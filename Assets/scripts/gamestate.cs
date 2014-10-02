@@ -9,6 +9,8 @@ public class gamestate : MonoBehaviour {
 	private string activeLevel;			// Active level
 	private int dimension;
 	private bool game;
+	private bool win;
+	private float time; 
 
 	public string getLevel()
 	{
@@ -36,7 +38,25 @@ public class gamestate : MonoBehaviour {
 	{
 		game = newGame;
 	}
-	
+
+	public bool isWin()
+	{
+		return win;
+	}
+	public void setwin(bool newWin)
+	{
+		win = newWin;
+	}
+
+	public float getTime()
+	{
+		return time;
+	}
+	public void setTime(float newTime)
+	{
+		time = newTime;
+	}
+
 	// ---------------------------------------------------------------------------------------------------
 	// gamestate()
 	// --------------------------------------------------------------------------------------------------- 
@@ -50,7 +70,7 @@ public class gamestate : MonoBehaviour {
 			{
 				instance = ((GameObject) new GameObject("gamestate")).AddComponent<gamestate>();
 
-				instance.dimension = 3;
+				instance.dimension = 5;
 				instance.game = true;
 
 			}
@@ -68,16 +88,50 @@ public class gamestate : MonoBehaviour {
 	
 	
 	// ---------------------------------------------------------------------------------------------------
+	// openInstructions()
+	// --------------------------------------------------------------------------------------------------- 
+	// Opens instructions
+	// ---------------------------------------------------------------------------------------------------
+	public void openInstructions(int newDimension, bool newGame)
+	{
+		activeLevel = "Level "+newDimension;
+		dimension = newDimension;
+		game = newGame;
+		Application.LoadLevel("instructions");
+	}
+
+	// ---------------------------------------------------------------------------------------------------
 	// startState()
 	// --------------------------------------------------------------------------------------------------- 
 	// Creates a new game state
 	// ---------------------------------------------------------------------------------------------------
-	public void startState(int newDimension, bool newGame)
+	public void startGame(int newDimension, bool newGame)
 	{
-		print ("Creating a new game state");
 		activeLevel = "Level "+newDimension;
 		dimension = newDimension;
 		game = newGame;
 		Application.LoadLevel("game01");
 	}
+
+	// ---------------------------------------------------------------------------------------------------
+	// gotoGameStart()
+	// --------------------------------------------------------------------------------------------------- 
+	// Creates a new game state
+	// ---------------------------------------------------------------------------------------------------
+	public void gotoGameStart()
+	{
+		Application.LoadLevel("gamestart");
+	}
+
+	// ---------------------------------------------------------------------------------------------------
+	// gotoGameStart()
+	// --------------------------------------------------------------------------------------------------- 
+	// Creates a new game state
+	// ---------------------------------------------------------------------------------------------------
+	public void gamefinish(float time)
+	{
+		gamestate.Instance.setTime (time);
+		Application.LoadLevel("gamefinish");
+	}
+
 }
