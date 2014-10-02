@@ -42,14 +42,14 @@ public class instructions : MonoBehaviour {
 			GUI.Label (new Rect (Screen.width / 2 - 200, 120, 400, 230), "Select cubes by touch.\n\nDestroy selected cubes with 'Destroy Selected'\n\nYou can rotate & pinch.\n\nEnjoy!", textStyle);
 		}
 
-		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), "Back to Menu",buttonStyle))
-		{
-			gamestate.Instance.gotoGameStart();
-		}
-		
-		if(GUI.Button(new Rect (Screen.width/2-90, 410, 180, 60), "Start",buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), "Start",buttonStyle))
 		{
 			startGame();
+		}
+
+		if(GUI.Button(new Rect (Screen.width/2-90, 410, 180, 60), "Back to Menu",buttonStyle))
+		{
+			gamestate.Instance.gotoGameStart();
 		}
 
 		
