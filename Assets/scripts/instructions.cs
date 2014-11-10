@@ -59,14 +59,14 @@ public class instructions : MonoBehaviour {
 
 		textStyle = new GUIStyle(GUI.skin.label);
 		textStyle.font = guiFont;
-		textStyle.fontSize = fontSize;
+		textStyle.fontSize = (int)(fontSize/1.3f);
 		textStyle.alignment = TextAnchor.MiddleCenter;
 
 		GUI.Label(new Rect(0, fontSize*1, Screen.width, fontSize*4), lblAppName, titleStyle);
 		GUI.Label(new Rect(0, fontSize*5, Screen.width, fontSize*2), lblInstructions, subTitleStyle);
 		GUI.Label (new Rect (0, fontSize*7, Screen.width, fontSize*10), lblInstructionsText, textStyle);
 
-		if(GUI.Button(new Rect (Screen.width/2-fontSize*5, fontSize*18, fontSize*10, fontSize*3), lblStart,buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-fontSize*5, fontSize*17, fontSize*10, fontSize*3), lblStart,buttonStyle))
 		{
 			startGame();
 		}

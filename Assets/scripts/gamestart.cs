@@ -77,6 +77,10 @@ public class gamestart : MonoBehaviour {
 		}
 
 		GUI.Label(new Rect(Screen.width/2-fontSize*20, fontSize*1, fontSize*40, fontSize*4), lblAppName, titleStyle);
+
+		//FIX per problemi di caratteri mancanti su Android Nexus
+		GUI.Label(new Rect(Screen.width/2-fontSize*20, fontSize*80, fontSize*40, fontSize*2), "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.", subTitleStyle);
+
 		GUI.Label(new Rect(Screen.width/2-fontSize*20, fontSize*5, fontSize*40, fontSize*2), lblMadeBy, subTitleStyle);
 
 		GUI.Label(new Rect(Screen.width/2-fontSize*20, fontSize*9, fontSize*40, fontSize*2), lblSize + ":" +dimension, subTitleStyle);
