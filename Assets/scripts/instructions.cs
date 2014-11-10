@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class instructions : MonoBehaviour {
 
+	public Font guiFont;
+	public Font titleFont;
+	
 	private GUIStyle buttonStyle;
 	private GUIStyle titleStyle;
 	private GUIStyle subTitleStyle;
@@ -28,6 +32,7 @@ public class instructions : MonoBehaviour {
 		} else {
 			lblInstructionsText = gamestate.Instance.getLangString ("sandboxInstructions");
 		}
+		lblInstructionsText = lblInstructionsText.Replace (" ", "    ");
 		lblStart = gamestate.Instance.getLangString ("start");
 		lblBackToMenu = gamestate.Instance.getLangString ("backToMenu");
 	}
@@ -35,32 +40,38 @@ public class instructions : MonoBehaviour {
 	// Our Startscreen GUI
 	void OnGUI () 
 	{
+		int fontSize = (int)Math.Min((Screen.height / 600f) * 21f,(Screen.width / 600f) * 21f);
+
 		buttonStyle = new GUIStyle(GUI.skin.button);
-		buttonStyle.fontSize = 21;
+		buttonStyle.font = guiFont;
+		buttonStyle.fontSize = fontSize;
 		buttonStyle.alignment = TextAnchor.MiddleCenter;
 		
 		titleStyle = new GUIStyle(GUI.skin.label);
-		titleStyle.fontSize = 40;
+		titleStyle.font = titleFont;
+		titleStyle.fontSize = fontSize*2;
 		titleStyle.alignment = TextAnchor.MiddleCenter;
 		
 		subTitleStyle = new GUIStyle(GUI.skin.label);
-		subTitleStyle.fontSize = 21;
+		subTitleStyle.font = guiFont;
+	    subTitleStyle.fontSize = fontSize;
 		subTitleStyle.alignment = TextAnchor.MiddleCenter;
 
 		textStyle = new GUIStyle(GUI.skin.label);
-		textStyle.fontSize = 15;
+		textStyle.font = guiFont;
+		textStyle.fontSize = fontSize;
 		textStyle.alignment = TextAnchor.MiddleCenter;
 
-		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 40), lblAppName, titleStyle);
-		GUI.Label(new Rect(Screen.width/2-200, 70, 400, 40), lblInstructions, subTitleStyle);
-		GUI.Label (new Rect (Screen.width / 2 - 200, 120, 400, 230), lblInstructionsText, textStyle);
+		GUI.Label(new Rect(0, fontSize*1, Screen.width, fontSize*4), lblAppName, titleStyle);
+		GUI.Label(new Rect(0, fontSize*5, Screen.width, fontSize*2), lblInstructions, subTitleStyle);
+		GUI.Label (new Rect (0, fontSize*7, Screen.width, fontSize*10), lblInstructionsText, textStyle);
 
-		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), lblStart,buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-fontSize*5, fontSize*18, fontSize*10, fontSize*3), lblStart,buttonStyle))
 		{
 			startGame();
 		}
 
-		if(GUI.Button(new Rect (Screen.width/2-90, 410, 180, 60), lblBackToMenu,buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-fontSize*5, fontSize*21, fontSize*10, fontSize*3), lblBackToMenu,buttonStyle))
 		{
 			gamestate.Instance.gotoGameStart();
 		}

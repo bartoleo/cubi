@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class gamefinish : MonoBehaviour {
 
+	public Font guiFont;
+	public Font titleFont;
+	
 	private GUIStyle buttonStyle;
 	private GUIStyle titleStyle;
 	private GUIStyle subTitleStyle;
@@ -27,22 +31,27 @@ public class gamefinish : MonoBehaviour {
 	// Our Startscreen GUI
 	void OnGUI () 
 	{
+		int fontSize = (int)Math.Min((Screen.height / 600f) * 21f,(Screen.width / 600f) * 21f);
+
 		buttonStyle = new GUIStyle(GUI.skin.button);
-		buttonStyle.fontSize = 21;
+		buttonStyle.font = guiFont;
+		buttonStyle.fontSize = fontSize;
 		buttonStyle.alignment = TextAnchor.MiddleCenter;
 		
 		titleStyle = new GUIStyle(GUI.skin.label);
-		titleStyle.fontSize = 40;
+		titleStyle.font = titleFont;
+		titleStyle.fontSize = (int)(fontSize*1.5);
 		titleStyle.alignment = TextAnchor.MiddleCenter;
 
 		subTitleStyle = new GUIStyle(GUI.skin.label);
-		subTitleStyle.fontSize = 21;
+		subTitleStyle.font = guiFont;
+		subTitleStyle.fontSize = fontSize;
 		subTitleStyle.alignment = TextAnchor.MiddleCenter;
 
-		GUI.Label(new Rect(Screen.width/2-240, 30, 480, 60), lblCongratulations, titleStyle);
-		GUI.Label(new Rect(Screen.width/2-240, 80, 480, 60), lblYourTimeIs+utility.getTimeMinutesSeconds(gamestate.Instance.getTime()), subTitleStyle);
+		GUI.Label(new Rect(0, fontSize*1 , Screen.width, fontSize*4), lblCongratulations, titleStyle);
+		GUI.Label(new Rect(0, fontSize*7 , Screen.width, fontSize*4), lblYourTimeIs+utility.getTimeMinutesSeconds(gamestate.Instance.getTime()), subTitleStyle);
 		
-		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), lblBackToMenu,buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-fontSize*5, fontSize*21, fontSize*10, fontSize*3), lblBackToMenu,buttonStyle))
 		{
 			gamestate.Instance.gotoGameStart();
 		}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class cubi : MonoBehaviour
 {
@@ -235,22 +236,24 @@ public class cubi : MonoBehaviour
 
 	void OnGUI () 
 	{
+		int fontSize = (int)Math.Min((Screen.height / 600f) * 21f,(Screen.width / 600f) * 21f);
+
 		GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-		myButtonStyle.fontSize = 21;
+		myButtonStyle.fontSize = fontSize;
 
 		GUIStyle timerLabelStyle = new GUIStyle(GUI.skin.label);
-		timerLabelStyle.fontSize = 21;
+		timerLabelStyle.fontSize = fontSize;
 		timerLabelStyle.alignment = TextAnchor.MiddleRight;
 
 		if (!game) {
-			if (GUI.Button (new Rect (10, 10, 220, 60), lblDestroySelected,myButtonStyle)) {
+			if (GUI.Button (new Rect (10, 10, fontSize*14, fontSize*4), lblDestroySelected,myButtonStyle)) {
 				destroySelected();
 			}
 		}
 
 		GUI.color = Color.black;
 
-		GUI.Label (new Rect (Screen.width - 200, 30, 170, 30), lblTime+ ": "+utility.getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
+		GUI.Label (new Rect (Screen.width - fontSize*16, 10, fontSize*14, fontSize*4), lblTime+ ": "+utility.getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
 
 	}
 
@@ -327,7 +330,7 @@ public class cubi : MonoBehaviour
 		int randomIndex = 0;
 		while (inputList.Count > 0)
 		{
-			randomIndex = Random.Range(0, inputList.Count); //Choose a random object in the list
+			randomIndex = UnityEngine.Random.Range(0, inputList.Count); //Choose a random object in the list
 			randomList.Add(inputList[randomIndex]); //add it to the new, random list
 			inputList.RemoveAt(randomIndex); //remove to avoid duplicates
 		}
