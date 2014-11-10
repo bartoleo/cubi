@@ -26,6 +26,14 @@ public class cubi : MonoBehaviour
 	GameObject second;
 	GameObject[][][] grigliaCubi;
 
+	string lblTime;
+	string lblDestroySelected;
+
+	void OnEnable() {
+		lblTime = gamestate.Instance.getLangString ("time");
+		lblDestroySelected = gamestate.Instance.getLangString ("destroySelected");
+	}
+
 
 	void Start ()
 	{
@@ -235,14 +243,14 @@ public class cubi : MonoBehaviour
 		timerLabelStyle.alignment = TextAnchor.MiddleRight;
 
 		if (!game) {
-			if (GUI.Button (new Rect (10, 10, 200, 60), "Destroy Selected",myButtonStyle)) {
+			if (GUI.Button (new Rect (10, 10, 220, 60), lblDestroySelected,myButtonStyle)) {
 				destroySelected();
 			}
 		}
 
 		GUI.color = Color.black;
 
-		GUI.Label (new Rect (Screen.width - 200, 30, 170, 30), "Time: "+utility.getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
+		GUI.Label (new Rect (Screen.width - 200, 30, 170, 30), lblTime+ ": "+utility.getTimeMinutesSeconds(Time.time - startTime), timerLabelStyle);
 
 	}
 

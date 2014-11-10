@@ -7,11 +7,29 @@ public class instructions : MonoBehaviour {
 	private GUIStyle titleStyle;
 	private GUIStyle subTitleStyle;
 	private GUIStyle textStyle;
-	
+
+	private string lblAppName;
+	private string lblInstructions;
+	private string lblInstructionsText;
+	private string lblStart;
+	private string lblBackToMenu;
+
 	private int dimension = 5;
 	// Use this for initialization
 	void Start () {
 	
+	}
+
+	void OnEnable() {
+		lblAppName = gamestate.Instance.getLangString ("appName");
+		lblInstructions = gamestate.Instance.getLangString ("instructions");
+		if (gamestate.Instance.isGame ()) {
+			lblInstructionsText = gamestate.Instance.getLangString ("gameInstructions");
+		} else {
+			lblInstructionsText = gamestate.Instance.getLangString ("sandboxInstructions");
+		}
+		lblStart = gamestate.Instance.getLangString ("start");
+		lblBackToMenu = gamestate.Instance.getLangString ("backToMenu");
 	}
 
 	// Our Startscreen GUI
@@ -33,21 +51,16 @@ public class instructions : MonoBehaviour {
 		textStyle.fontSize = 15;
 		textStyle.alignment = TextAnchor.MiddleCenter;
 
-		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 40), "CUBI", titleStyle);
-		GUI.Label(new Rect(Screen.width/2-200, 70, 400, 40), "Instructions", subTitleStyle);
+		GUI.Label(new Rect(Screen.width/2-200, 30, 400, 40), lblAppName, titleStyle);
+		GUI.Label(new Rect(Screen.width/2-200, 70, 400, 40), lblInstructions, subTitleStyle);
+		GUI.Label (new Rect (Screen.width / 2 - 200, 120, 400, 230), lblInstructionsText, textStyle);
 
-		if (gamestate.Instance.isGame ()) {
-			GUI.Label (new Rect (Screen.width / 2 - 200, 120, 400, 230), "Match two cubes by color to destroy them.\n\nYou can rotate & pinch.\n\nEnjoy!", textStyle);
-		} else {
-			GUI.Label (new Rect (Screen.width / 2 - 200, 120, 400, 230), "Select cubes by touch.\n\nDestroy selected cubes with 'Destroy Selected'\n\nYou can rotate & pinch.\n\nEnjoy!", textStyle);
-		}
-
-		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), "Start",buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), lblStart,buttonStyle))
 		{
 			startGame();
 		}
 
-		if(GUI.Button(new Rect (Screen.width/2-90, 410, 180, 60), "Back to Menu",buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 410, 180, 60), lblBackToMenu,buttonStyle))
 		{
 			gamestate.Instance.gotoGameStart();
 		}

@@ -7,11 +7,21 @@ public class gamefinish : MonoBehaviour {
 	private GUIStyle titleStyle;
 	private GUIStyle subTitleStyle;
 	private GUIStyle textStyle;
-	
+
+	private string lblCongratulations;
+	private string lblYourTimeIs;
+	private string lblBackToMenu;
+
 	private int dimension = 5;
 	// Use this for initialization
 	void Start () {
 	
+	}
+
+	void OnEnable() {
+		lblCongratulations = gamestate.Instance.getLangString ("congratulations");
+		lblYourTimeIs = gamestate.Instance.getLangString ("yourTimeIs");
+		lblBackToMenu = gamestate.Instance.getLangString ("backToMenu");
 	}
 
 	// Our Startscreen GUI
@@ -29,10 +39,10 @@ public class gamefinish : MonoBehaviour {
 		subTitleStyle.fontSize = 21;
 		subTitleStyle.alignment = TextAnchor.MiddleCenter;
 
-		GUI.Label(new Rect(Screen.width/2-240, 30, 480, 60), "CONGRATULATIONS!!!", titleStyle);
-		GUI.Label(new Rect(Screen.width/2-240, 80, 480, 60), "Your time is "+utility.getTimeMinutesSeconds(gamestate.Instance.getTime()), subTitleStyle);
+		GUI.Label(new Rect(Screen.width/2-240, 30, 480, 60), lblCongratulations, titleStyle);
+		GUI.Label(new Rect(Screen.width/2-240, 80, 480, 60), lblYourTimeIs+utility.getTimeMinutesSeconds(gamestate.Instance.getTime()), subTitleStyle);
 		
-		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), "Back to Menu",buttonStyle))
+		if(GUI.Button(new Rect (Screen.width/2-90, 350, 180, 60), lblBackToMenu,buttonStyle))
 		{
 			gamestate.Instance.gotoGameStart();
 		}

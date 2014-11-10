@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languages>
+	<English>
+     	<string name="appName">Cubi</string>
+		<string name="madeBy">by Bartoleo</string>
+		<string name="size">Size</string>
+		<string name="startGame">Start Game</string>
+		<string name="sandbox">Sandbox</string>
+		<string name="quit">Quit</string>
+		<string name="congratulations">CONGRATULATIONS!!!</string>
+		<string name="yourTimeIs">Your time is </string>
+		<string name="backToMenu">Back to Menu</string>
+		<string name="instructions">Instructions</string>		
+		<string name="start">Start</string>		
+		<string name="gameInstructions">Match two cubes by color to destroy them.
+
+You can rotate &amp; pinch.
+
+Enjoy!</string>
+		<string name="sandboxInstructions">"Select cubes by touch.
+
+Destroy selected cubes with 'Destroy Selected'
+
+You can rotate &amp; pinch.
+
+Enjoy!</string>
+		<string name="time">Time</string>	
+		<string name="destroySelected">Destroy Selected</string>
+	</English>
+
+	<Italian>
+     	<string name="appName">Cubi</string>
+		<string name="madeBy">by Bartoleo</string>
+		<string name="size">Dimensione</string>
+		<string name="startGame">Inizia</string>
+		<string name="sandbox">Sandbox</string>
+		<string name="quit">Chiudi</string>
+		<string name="congratulations">CONGRATULAZIONI!!!</string>
+		<string name="yourTimeIs">Il tuo tempo è </string>
+		<string name="backToMenu">Torna al Menu</string>
+		<string name="instructions">Istruzioni</string>		
+		<string name="start">Inizia</string>		
+		<string name="gameInstructions">Seleziona due cubi dello stesso colore per distruggerli.
+		
+Puoi ruotare e zoomare con il pinch &amp;
+		
+Buon divertimento!</string>
+		<string name="sandboxInstructions">Seleziona i cubi.
+		
+Distruggili selezionando 'Distruggi Selezionati'
+
+Puoi ruotare e zoomare con il pinch &amp;.
+
+Buon divertimento!</string>
+		<string name="time">Tempo</string>	
+		<string name="destroySelected">Distruggi Selezionati</string>
+	</Italian>
+</languages>

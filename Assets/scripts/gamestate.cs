@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class gamestate : MonoBehaviour {
 	
@@ -11,6 +12,10 @@ public class gamestate : MonoBehaviour {
 	private bool game;
 	private bool win;
 	private float time; 
+
+	private string currentLang;
+
+	private Lang lang;
 
 	public string getLevel()
 	{
@@ -72,6 +77,9 @@ public class gamestate : MonoBehaviour {
 
 				instance.dimension = 5;
 				instance.game = true;
+				instance.currentLang = Application.systemLanguage.ToString();
+
+				instance.lang = new Lang("language", instance.currentLang);
 
 			}
 			
@@ -132,6 +140,10 @@ public class gamestate : MonoBehaviour {
 	{
 		gamestate.Instance.setTime (time);
 		Application.LoadLevel("gamefinish");
+	}
+
+	public string getLangString(string key){
+		return gamestate.instance.lang.getString (key);
 	}
 
 }
