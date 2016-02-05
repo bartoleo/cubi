@@ -30,7 +30,7 @@ public class cubo : MonoBehaviour {
 		if (pSelected) {
 			color = color*2;
 		}
-		this.renderer.material.color = color;
+		this.GetComponent<Renderer>().material.color = color;
 	}
 
 	public void seleziona(bool pSelected){
@@ -41,9 +41,9 @@ public class cubo : MonoBehaviour {
 	public void selezionaSandbox(){
 		selected = !selected;
 		if (selected) {
-			this.renderer.material.color = new Color (1, 0, 0); 
+			this.GetComponent<Renderer>().material.color = new Color (1, 0, 0); 
 		} else {
-			this.renderer.material.color = new Color (1, 1, 1); 
+			this.GetComponent<Renderer>().material.color = new Color (1, 1, 1); 
 		}
 	}
 

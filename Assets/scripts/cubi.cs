@@ -13,6 +13,8 @@ public class cubi : MonoBehaviour
 
 	public GameObject cuboPrefab;
 	public Camera camera;
+	public GameObject explosion;
+
 	public float speed = 0.1F;
 	private bool mobile = (Application.platform == RuntimePlatform.IPhonePlayer) || (Application.platform == RuntimePlatform.Android);
 	Vector3 oldScreenPoint = Vector3.zero ;
@@ -263,6 +265,13 @@ public class cubi : MonoBehaviour
 				for (int z=0; z<grigliaCubi.Length; z++) {
 					if (grigliaCubi[x][y][z]!=null){
 						if (grigliaCubi[x][y][z].GetComponent<cubo>().selected){
+							if(explosion!=null){
+								GameObject newexplosion = (GameObject)Instantiate(explosion,grigliaCubi[x][y][z].transform.position-Vector3.forward, Quaternion.identity); 
+								Destroy(newexplosion,3);
+							}
+							if (this.GetComponent<AudioSource>()!=null){
+								this.GetComponent<AudioSource>().Play();
+							}
 							Destroy(grigliaCubi[x][y][z]);
 							grigliaCubi[x][y][z]=null;
 						}

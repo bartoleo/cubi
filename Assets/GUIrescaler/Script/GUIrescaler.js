@@ -37,8 +37,8 @@ if(Screen.width != origResX || Screen.height != origResY){
 	if(getTxtr != null){
 		resX = Screen.width;
 		resY = Screen.height;
-		txtrX = transform.guiTexture.texture.width;
-		txtrY = transform.guiTexture.texture.height;
+		txtrX = transform.GetComponent.<GUITexture>().texture.width;
+		txtrY = transform.GetComponent.<GUITexture>().texture.height;
 		transform.localScale.y = (transform.localScale.x*(resX/resY))/(txtrX/txtrY);
 	}
 }
